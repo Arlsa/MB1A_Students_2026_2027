@@ -1,0 +1,19 @@
+---
+title: "hpa_quarto"
+author: "Arisa Tani"
+---
+
+I am comparing the total number of genes with regionally elevated expression in the forebrain in three species: human, pig and mouse.
+
+```{r}
+total_human <- sum(180, 83, 57, 110)
+print(paste("Human:", total_human))
+
+total_pig <- sum(109, 157, 31, 45)
+print(paste("Pig:", total_pig))
+
+total_mouse <- sum(55, 185, 60, 98)
+print(paste("Mouse:", total_mouse))
+```
+
+Humans had the most genes regionally elevated in the forebrain.
