@@ -1,0 +1,31 @@
+---
+title: "ukhsa_data_analysis"
+author: "Arisa Tani"
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+```
+
+# Reading csv file
+I selected the E. coli dataset from the UKHSA website. I have read the data into csv files and made the first ten lines into a table.
+```{r}
+e_coli <- read_csv("data/ukhsa-chart-download.csv")
+
+gt(head(e_coli))
+```
+
+Next, I will visualize this data into a plot using ggplot.
+```{r}
+ggplot(e_coli, aes(
+  x = date,
+  y = metric_value,
+)) +
+  geom_line(colour = "red") +
+  xlab("Date") + 
+  ylab("Cases") +
+  ggtitle("Lead poisoning cases by Date")
+```
+
+

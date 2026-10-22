@@ -3,6 +3,12 @@ title: "prac1_exercises"
 author: "Arisa Tani"
 ---
 
+```{r}
+library(tidyverse)
+library(gt)
+```
+
+
 ## Exercise 1: Using functions
 ```{r}
 # whole number
@@ -24,6 +30,116 @@ print(rep(x = 5, times = 7))
 ## Exercise 3: Character, numerical and logical variables
 Character
 ```{r}
-
+my_char <- "this is a character variable"
+print(class(my_char))
 ```
+Numerical
+```{r}
+my_num <- 1
+print(class(my_num))
+```
+Logical
+```{r}
+my_logic <- TRUE
+print(class(my_logic))
+```
+
+## Exercise 4: Using variables of different types
+```{r}
+cell_id_1 <- "CX1"
+cell_id_2 <- "CX2"
+treated_1 <- TRUE
+treated_2 <- FALSE
+num_cells_before_1 <- 5415
+num_cells_before_2 <- 8123
+num_cells_after_1 <- 1432
+num_cells_after_2 <- 7543
+```
+
+## Bonus Exercise
+```{r}
+print(TRUE + TRUE)
+print(TRUE + FALSE)
+print(5 + TRUE)
+```
+TRUE is converted to 1.
+FALSE is converted to 0.
+
+```{r}
+x <- NA
+print(x == NA)
+print(is.na(x))
+```
+NA refers to an unknown / missing value, so == NA is invalid. Use is.na to check.
+
+```{r}
+x <- 0 / 0
+print(x)
+print(is.na(x))
+print(is.nan(x))
+```
+NaN is a special kind of missing value (Not a Number). (A NaN value is always NA but an NA value is not always NaN?)
+
+```{r}
+print(round(2.5))
+print(round(3.5))
+```
+R uses "round to even" for numbers exactly halfway between 2 values to reduce bias.
+
+```{r}
+print(1/0)
+print(-1/0)
+```
+Inf and -Inf are positive infinity and negative infinity. NULL represents a value that doesn't exist.
+
+# Exercise 5: Vectors
+```{r}
+cell_id <- c(cell_id_1, cell_id_2)
+treated <- c(treated_1, treated_2)
+num_cells_before <- c(num_cells_before_1, num_cells_before_2)
+num_cells_after <- c(num_cells_after_1, num_cells_after_2)
+```
+
+# Exercise 6: Indexing
+```{r}
+all_my_pets <- c("dog", "horse", "guinea pig", "chicken", "cat")
+my_pet <- all_my_pets[4]
+print(my_pet)
+```
+
+# Bonus Exercise
+```{r}
+x <- c(2, -4, 6, -2)
+# apply functions to all values of vectors like this:
+x * 2
+x > 5
+sum(x)
+abs(x)
+```
+
+# Exercise 7: Creating a data frame
+```{r}
+# using values
+my_data_frame <- tibble(
+  cell_ID = c(cell_id_1, cell_id_2),
+  treated = c(treated_1, treated_2),
+  num_cells_before = c(num_cells_before_1, num_cells_before_2),
+  num_cells_after = c(num_cells_after_1, num_cells_after_2)
+)
+
+gt(my_data_frame)
+```
+
+```{r}
+# using vectors
+my_data_frame <- tibble(
+  cell_ID = cell_id,
+  treated = treated,
+  num_cells_before = num_cells_before,
+  num_cells_after = num_cells_after_1, num_cells_after_2
+)
+
+gt(my_data_frame)
+```
+
 
