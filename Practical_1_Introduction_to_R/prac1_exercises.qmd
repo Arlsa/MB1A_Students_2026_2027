@@ -1,0 +1,29 @@
+---
+title: "prac1_exercises"
+author: "Arisa Tani"
+---
+
+## Exercise 1: Using functions
+```{r}
+# whole number
+round(3.14159)
+
+# two digits after decimal point
+round(3.14159, digits = 2)
+```
+
+## Exercise 2: Argument order
+```{r}
+# specified by order
+print(rep(5, 7))
+
+# using keywords
+print(rep(x = 5, times = 7))
+```
+
+## Exercise 3: Character, numerical and logical variables
+Character
+```{r}
+
+```
+
