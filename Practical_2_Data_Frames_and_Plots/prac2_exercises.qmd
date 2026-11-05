@@ -21,3 +21,23 @@ print(y > 20)
 print(y <= 12)
 ```
 
+Joining data frames with non-unique values
+```{r}
+birds <- tibble(
+  Bird = c("Robin", "Robin", "Blackbird"),
+  Mass = c(18, 19, 100)
+)
+
+observations <- tibble(
+  Bird = c("Robin", "Robin", "Robin", "Blackbird"),
+  Count = c(4, 7, 2, 5)
+)
+
+inner_join(birds, observations, by = "Bird")
+```
+
+
+
+
+
+
