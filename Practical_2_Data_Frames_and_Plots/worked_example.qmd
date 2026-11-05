@@ -1,0 +1,91 @@
+---
+title: "worked_example"
+---
+
+```{r}
+library(gt)
+library(tidyverse)
+library(maps)
+```
+
+```{r}
+```
+
+Reading breeding site location file
+```{r}
+breeding_sites <- read_csv("data/breeding_site_locations.csv")
+gt(breeding_sites)
+```
+
+```{r}
+glimpse(breeding_sites)
+```
+<chr> - character data
+<dbl> - numerical data
+
+Reading migratory connectivity file
+```{r}
+migration_sites <- read_csv("data/migratory_connectivity_dataset.csv")
+gt(head(migration_sites))
+```
+
+```{r}
+glimpse(migration_sites)
+```
+Pipe data to select relevant columns
+```{r}
+breeding_sites_selected <- breeding_sites |>
+  select(Site, 
+         Longitude, 
+         Latitude) |>
+  distinct()|>
+  rename(Breeding_Longitude = Longitude, 
+         Breeding_Latitude = Latitude)
+
+gt(breeding_sites_selected)
+```
+```{r}
+migration_sites_selected <- migration_sites |>
+  select(Site, 
+         winterLongitude, 
+         winterLatitude, 
+         pslon, 
+         pslat, 
+         iblon, 
+         iblat, 
+         awestlon, 
+         awestlat) |>
+  distinct()|>
+  rename(Winter_Longitude = winterLongitude, 
+         Winter_Latitude = winterLatitude, 
+         Stopover_Longitude = pslon, 
+         Stopover_Latitude = pslat, 
+         Iberian_Longitude = iblon, 
+         Iberian_Latitude = iblat,
+         Westmost_Longitude = awestlon, 
+         Westmost_Latitude = awestlat)
+
+gt(migration_sites_selected)
+```
+
+Filtering breeding site and migration site data
+```{r}
+breeding_sites_exc <- breeding_sites_selected |> 
+  filter(Site != "Spain")
+gt(breeding_sites_exc)
+```
+```{r}
+migration_sites_exc <- migration_sites_selected |> 
+  filter(Site != "Spain")
+gt(migration_sites_exc)
+```
+
+
+
+
+
+
+
+
+
+
