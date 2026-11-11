@@ -1,0 +1,81 @@
+---
+title: "squirrels"
+---
+
+(Setup)
+```{r}
+library(tidyverse)
+library(gt)
+library(cowsay)
+set.seed(42)
+```
+
+Squirrel steals seeds
+```{r}
+results <- c("SUCCESS", "FAIL")
+probs <- c(0.3, 0.7)
+
+trials <- sample(x = results, size = 150, replace = TRUE, prob = probs)
+
+num_success <-  sum(trials == "SUCCESS") 
+
+say(paste("I was successful", num_success, "times!"), by="squirrel")
+```
+
+1000 squirrels steal seeds
+```{r}
+combined_successes <- c()
+for (i in seq_len(1000)) {
+  is_success <- sample(c("SUCCESS", "FAILURE"),
+    size = 150,
+    replace = TRUE,
+    prob = c(0.3, 0.7)
+  )
+  n_successes <- sum(is_success == "SUCCESS")
+  combined_successes <- c(combined_successes, n_successes)
+}
+
+df_squirrels <- tibble("N_Successful_Heists" = combined_successes)
+gt(head(df_squirrels))
+
+ggplot(
+  df_squirrels,
+  aes(
+    x = N_Successful_Heists
+  )
+) + 
+  geom_bar() +
+  ggtitle("Number of Successful Heists per Squirrel - Simulated") +
+  xlab("Number of successful heists") +
+  ylab("Number of squirrels") +
+  theme_minimal()
+```
+
+Theretical binomial distribution
+```{r}
+df_squirrels_probs <- tibble()
+
+for (i in seq_len(150)) {
+  prob_success <- dbinom(i, 150, 0.3)
+  current_row <- tibble(
+    successes = i, 
+    probs_success = prob_success)
+  
+  df_squirrels_probs <- tibble(df_squirrels_probs |> bind_rows(current_row))
+}
+
+gt(head(df_squirrels_probs))
+
+ggplot(
+  df_squirrels_probs,
+  aes(
+    x = successes,
+    y = probs_success
+  )
+) + 
+  geom_col() +
+  ggtitle("Number of Successful Heists per Squirrel - Theoretical") +
+  xlab("Number of successful heists") +
+  ylab("Number of squirrels") +
+  theme_minimal()
+```
