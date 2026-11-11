@@ -1,0 +1,41 @@
+---
+title: "prac3_exercises"
+---
+
+(Setup)
+```{r}
+set.seed(42)
+library(tidyverse)
+library(gt)
+```
+
+For loops
+```{r}
+for (i in seq_len(20)){
+  print(i^3)
+}
+```
+
+```{r}
+for (i in seq_len(5)){
+  word <- paste(sample(letters, 5, replace = TRUE), collapse="")
+  print(word)
+}
+```
+
+Example: 10-course breakfast
+```{r}
+breakfast <- c("eggs", "bacon", "sausages", "toast")
+nums <- c(seq_len(5))
+table <- tibble()
+
+for (i in seq_len(10)){
+  current_row <- tibble(
+    Food = sample(breakfast, size=1),
+    Number = sample(nums, size=1)
+  )
+  table <- tibble(table |> bind_rows(current_row))
+}
+
+gt(table)
+```
